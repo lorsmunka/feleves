@@ -1,12 +1,12 @@
 import { Component } from "../Component.js";
 
-export class H1 extends Component {
+export class H2 extends Component {
   constructor(props) {
     super(props);
     this.className = props.className || "text-center mb-4";
   }
 
   render() {
-    return `<h1 class="${this.className}">${this.renderChildren()}</h1>`;
+    return `<h2 class="${this.className}">${this.renderChildren()}</h2>`;
   }
 }

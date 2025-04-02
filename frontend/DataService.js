@@ -1,5 +1,5 @@
 export class DataService {
-  static async getWeatherData() {
+  static getWeatherData() {
     const weatherData = [
       {
         day: "Monday",
@@ -38,11 +38,7 @@ export class DataService {
       },
     ];
 
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(weatherData);
-      }, 1000);
-    });
+    return weatherData;
   }
 
   static getPersonalizedGreeting() {
