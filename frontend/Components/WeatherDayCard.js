@@ -9,6 +9,9 @@ const conditionEmojis = {
   Cloudy: "☁️",
   Rainy: "🌧️",
   Windy: "💨",
+  Snowy: "❄️",
+  Stormy: "⛈️",
+  Foggy: "🌫️",
 };
 
 export class WeatherDayCard extends Component {
@@ -18,7 +21,7 @@ export class WeatherDayCard extends Component {
   }
 
   render() {
-    const { day, temperature, condition } = this.data;
+    const { day, temperature, condition, windSpeed, precipitation } = this.data;
     return new Div({
       className: "card weather-day-card shadow-sm border-0",
       children: [
@@ -28,22 +31,26 @@ export class WeatherDayCard extends Component {
             new H1({
               className: "weather-day-card-title card-title h5 fw-light mb-3 text-uppercase",
               children: [day.substring(0, 3)],
-            }).render(),
+            }),
             new Div({
               className: "weather-day-card-icon my-3",
-              children: [new EmojiIcon({ emoji: conditionEmojis[condition] || "❓", size: "lg" }).render()],
-            }).render(),
+              children: [new EmojiIcon({ emoji: conditionEmojis[condition] || "❓", size: "lg" })],
+            }),
             new Span({
               className: "weather-day-card-temperature d-block fw-bold fs-2 mb-2",
               children: [`${temperature}°`],
-            }).render(),
+            }),
             new Span({
-              className: "weather-day-card-condition text-secondary fs-6",
-              children: [condition],
-            }).render(),
+              className: "weather-day-card-details d-block text-muted",
+              children: [`${windSpeed} km/h`],
+            }),
+            new Span({
+              className: "weather-day-card-details d-block text-muted",
+              children: [`${precipitation} mm`],
+            }),
           ],
-        }).render(),
+        }),
       ],
-    }).render();
+    });
   }
 }

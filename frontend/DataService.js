@@ -5,42 +5,76 @@ export class DataService {
         day: "Monday",
         temperature: 20,
         condition: "Sunny",
+        windSpeed: 10, // km/h
+        humidity: 40, // %
+        uvIndex: 7,
+        precipitation: 0, // mm
+        pressure: 1015, // hPa
       },
       {
         day: "Tuesday",
-        temperature: 22,
-        condition: "Cloudy",
+        temperature: 0,
+        condition: "Snowy",
+        windSpeed: 7,
+        humidity: 78,
+        uvIndex: 2,
+        precipitation: 12,
+        pressure: 1006,
       },
       {
         day: "Wednesday",
-        temperature: 18,
-        condition: "Rainy",
+        temperature: 16,
+        condition: "Stormy",
+        windSpeed: 30,
+        humidity: 85,
+        uvIndex: 1,
+        precipitation: 20,
+        pressure: 998,
       },
       {
         day: "Thursday",
-        temperature: 25,
-        condition: "Sunny",
+        temperature: 10,
+        condition: "Foggy",
+        windSpeed: 6,
+        humidity: 90,
+        uvIndex: 1,
+        precipitation: 2,
+        pressure: 1009,
       },
       {
         day: "Friday",
         temperature: 21,
         condition: "Windy",
+        windSpeed: 25,
+        humidity: 45,
+        uvIndex: 6,
+        precipitation: 0,
+        pressure: 1010,
       },
       {
         day: "Saturday",
         temperature: 23,
         condition: "Sunny",
+        windSpeed: 10,
+        humidity: 38,
+        uvIndex: 7,
+        precipitation: 0,
+        pressure: 1014,
       },
       {
         day: "Sunday",
         temperature: 19,
         condition: "Cloudy",
+        windSpeed: 14,
+        humidity: 55,
+        uvIndex: 4,
+        precipitation: 0,
+        pressure: 1012,
       },
     ];
 
     return weatherData;
   }
-
   static getPersonalizedGreeting() {
     const date = new Date();
     const hours = date.getHours();
