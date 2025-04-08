@@ -22,6 +22,7 @@ export class WeatherDayCard extends Component {
 
   render() {
     const { day, temperature, condition, windSpeed, precipitation } = this.data;
+
     return new Div({
       className: "card weather-day-card shadow-sm border-0",
       children: [
@@ -51,6 +52,6 @@ export class WeatherDayCard extends Component {
           ],
         }),
       ],
-    });
+    }).render();
   }
 }
