@@ -2,7 +2,7 @@ import { Component } from "../Component.js";
 
 export class Button extends Component {
   constructor(props) {
-    super(props);
+    super({ tag: "button", ...props });
 
     const { onClick } = props;
     this.onClick = onClick;
@@ -10,6 +10,6 @@ export class Button extends Component {
 
   render() {
     const onClickString = `(${this.onClick})()`.replace(/"/g, "'");
-    return `<button onclick="${onClickString}" class="btn btn-primary"> ${this.renderChildren()}</button>`;
+    this.element.setAttribute("onclick", onClickString);
   }
 }

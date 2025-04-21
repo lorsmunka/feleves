@@ -2,11 +2,13 @@ import { Component } from "../Component.js";
 
 export class Span extends Component {
   constructor(props) {
-    super(props);
+    super({ tag: "span", ...props });
     this.className = props.className || "";
   }
 
   render() {
-    return `<span class="${this.className}">${this.renderChildren()}</span>`;
+    this.element.className = this.className;
+    super.render();
+    return this.element;
   }
 }

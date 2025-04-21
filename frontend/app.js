@@ -6,15 +6,7 @@ import { DetailedWeatherDayCard } from "./Components/DetailedWeatherDayCard.js";
 
 const budgetReact = new BudgetReact({
   rootId: "root",
-  children: [
-    new H1({ children: [`${DataService.getPersonalizedGreeting()}, Here's Your Weather Forecast`] }),
-    new WeatherWeek({
-      week: DataService.getWeatherData(),
-    }),
-    new DetailedWeatherDayCard({
-      data: DataService.getWeatherData()[0],
-    }),
-  ],
+  children: [new H1({ children: [`${DataService.getPersonalizedGreeting()}, Here's Your Weather Forecast`] })],
 });
 
 budgetReact.render();

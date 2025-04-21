@@ -2,7 +2,7 @@ import { Component } from "./Component.js";
 
 export class BudgetReact extends Component {
   constructor(props) {
-    super(props);
+    super({ tag: "div", ...props });
 
     const { rootId } = props;
     this.rootId = rootId;
@@ -14,8 +14,7 @@ export class BudgetReact extends Component {
       throw new Error(`Root element with id ${this.rootId} not found`);
     }
 
-    const childrenString = this.renderChildren();
-
-    root.innerHTML = childrenString;
+    this.renderChildren();
+    root.appendChild(this.element);
   }
 }

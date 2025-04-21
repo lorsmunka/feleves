@@ -2,11 +2,13 @@ import { Component } from "../Component.js";
 
 export class H1 extends Component {
   constructor(props) {
-    super(props);
+    super({ tag: "h1", ...props });
     this.className = props.className || "text-center mb-4";
   }
 
   render() {
-    return `<h1 class="${this.className}">${this.renderChildren()}</h1>`;
+    this.element.className = this.className;
+    super.render();
+    return this.element;
   }
 }

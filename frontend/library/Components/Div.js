@@ -2,11 +2,13 @@ import { Component } from "../Component.js";
 
 export class Div extends Component {
   constructor(props) {
-    super(props);
+    super({ tag: "div", ...props });
     this.className = props.className || "";
   }
 
   render() {
-    return `<div class="${this.className}">${this.renderChildren()}</div>`;
+    this.element.className = this.className;
+    super.render();
+    return this.element;
   }
 }
