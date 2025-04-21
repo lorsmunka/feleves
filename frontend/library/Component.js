@@ -6,6 +6,7 @@ export class Component {
     this.children = children || [];
     this.onMount = onMount || null;
     this.onRender = onRender || null;
+    this.className = props.className || "";
 
     this._state = state || {};
   }
@@ -50,6 +51,7 @@ export class Component {
   render() {
     this.renderLifecycle();
     this.renderChildren();
+    this.element.className = this.className;
 
     return this.element;
   }

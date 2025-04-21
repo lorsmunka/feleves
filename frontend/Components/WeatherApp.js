@@ -12,6 +12,7 @@ export class WeatherApp extends Component {
         weatherData: [],
         selectedDay: null,
       },
+      className: "weather-app mb-3 mt-3",
     });
 
     this.propsChildren = props.children || [];
@@ -42,7 +43,7 @@ export class WeatherApp extends Component {
         appContainerChildren.push(
           new WeatherDetail({
             weatherData: selectedDay,
-            className: "mb-4",
+            className: "mb-3 mt-3",
           })
         );
       }
@@ -63,7 +64,7 @@ export class WeatherApp extends Component {
 
     const appContainer = new Div({
       children: appContainerChildren,
-      className: "container mt-4",
+      className: "container mt-2",
     });
 
     this.children = [...this.propsChildren, appContainer];

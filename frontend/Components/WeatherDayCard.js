@@ -19,14 +19,28 @@ export function getWeatherEmoji(condition) {
 
 export function getTemperatureClass(temp) {
   if (temp < 0) {
-    return "text-primary";
+    return "text-temp-cold";
   } else if (temp < 15) {
-    return "text-info";
+    return "text-temp-cool";
   } else if (temp < 25) {
-    return "text-success";
+    return "text-temp-warm";
   } else {
-    return "text-danger";
+    return "text-temp-hot";
   }
+}
+
+export function getBackgroundGradient(condition) {
+  const gradientMap = {
+    Sunny: "bg-sunny",
+    Cloudy: "bg-cloudy",
+    Rainy: "bg-rainy",
+    Snowy: "bg-snowy",
+    Windy: "bg-windy",
+    Stormy: "bg-stormy",
+    Foggy: "bg-foggy",
+  };
+
+  return gradientMap[condition] || "bg-default";
 }
 
 export class WeatherDayCard extends Component {
@@ -46,24 +60,46 @@ export class WeatherDayCard extends Component {
   }
 
   render() {
+    const condition = this.weatherData.condition;
+    const bgClass = getBackgroundGradient(condition);
+
     const dayContainer = new Div({
-      className: "card shadow-sm rounded-lg p-3 text-center h-100",
+      className: `card glassmorphic ${bgClass} rounded-4 p-4 text-center h-100 weather-card-hover transition`,
       children: [
         new Div({
-          className: "mb-2 fw-bold",
-          children: [this.weatherData.day],
-        }),
-        new EmojiIcon({
-          emoji: getWeatherEmoji(this.weatherData.condition),
-          className: "fs-1 mb-2 d-block",
+          className: "card-header-transparent border-0 pt-2 pb-3",
+          children: [
+            new Div({
+              className: "day-label fw-bold text-contrast",
+              children: [this.weatherData.day],
+            }),
+          ],
         }),
         new Div({
-          className: `${getTemperatureClass(this.weatherData.temperature)} fs-4 fw-bold`,
-          children: [`${this.weatherData.temperature}°C`],
+          className: "card-body d-flex flex-column justify-content-center py-2",
+          children: [
+            new EmojiIcon({
+              emoji: getWeatherEmoji(condition),
+              className: "weather-icon fs-1 mb-3 d-block",
+            }),
+            new Div({
+              className: `temperature-display ${getTemperatureClass(this.weatherData.temperature)} fs-2 fw-bold mb-1`,
+              children: [`${this.weatherData.temperature}°C`],
+            }),
+            new Span({
+              className: "condition-text text-contrast fs-6",
+              children: [condition],
+            }),
+          ],
         }),
-        new Span({
-          className: "text-muted",
-          children: [this.weatherData.condition],
+        new Div({
+          className: "card-footer-transparent border-0 mt-2 pt-0 pb-1",
+          children: [
+            new Div({
+              className: "humidity-wind text-contrast-secondary small",
+              children: [`${this.weatherData.humidity || "40%"} · ${this.weatherData.wind || "5 km/h"}`],
+            }),
+          ],
         }),
       ],
     });

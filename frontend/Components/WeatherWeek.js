@@ -9,7 +9,7 @@ export class WeatherWeek extends Component {
     this.weatherData = props.weatherData || [];
     this.onDaySelect = props.onDaySelect || null;
 
-    this.element.className = "weather-week";
+    this.element.className = "weather-week overflow-auto";
   }
 
   render() {
@@ -29,7 +29,7 @@ export class WeatherWeek extends Component {
     });
 
     const weatherRow = new Row({
-      columns: "row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-7",
+      columns: "row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5",
       gap: "g-3",
       children: dayCards,
     });
