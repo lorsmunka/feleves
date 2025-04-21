@@ -9,7 +9,13 @@ export class Button extends Component {
   }
 
   render() {
-    const onClickString = `(${this.onClick})()`.replace(/"/g, "'");
-    this.element.setAttribute("onclick", onClickString);
+    this.element.onclick = (event) => {
+      if (this.onClick) {
+        this.onClick(event);
+      }
+    };
+
+    super.render();
+    return this.element;
   }
 }
