@@ -1,19 +1,15 @@
 import { BudgetReact } from "./library/BudgetReact.js";
 import { H1 } from "./library/Components/H1.js";
 import { DataService } from "./DataService.js";
-import { Button } from "./library/Components/Button.js";
+import { WeatherApp } from "./Components/WeatherApp.js";
 
 const budgetReact = new BudgetReact({
   rootId: "root",
   children: [
-    new H1({
+    new WeatherApp({
       children: [
-        `${DataService.getPersonalizedGreeting()}, Here's Your Weather Forecast`,
-        new Button({
-          children: ["Refresh"],
-          onClick: () => {
-            console.log("Refresh button clicked");
-          },
+        new H1({
+          children: [`${DataService.getPersonalizedGreeting()}, Here's Your Weather Forecast`],
         }),
       ],
     }),

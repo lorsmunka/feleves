@@ -14,10 +14,9 @@ export class DataService {
     }
     const data = await response.json();
 
-    console.log(data);
-
     return data;
   }
+
   static getPersonalizedGreeting() {
     const date = new Date();
     const hours = date.getHours();
