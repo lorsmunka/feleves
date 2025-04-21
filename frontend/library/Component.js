@@ -10,6 +10,10 @@ export class Component {
     this._state = {};
   }
 
+  get state() {
+    return this._state;
+  }
+
   setState(newState) {
     this._state = { ...this._state, ...newState };
     this.render();
@@ -32,7 +36,7 @@ export class Component {
     });
   }
 
-  render() {
+  renderLifecycle() {
     if (this.onMount) {
       this.onMount();
       this.onMount = null;
@@ -41,8 +45,12 @@ export class Component {
     if (this.onRender) {
       this.onRender();
     }
+  }
 
+  render() {
+    this.renderLifecycle();
     this.renderChildren();
+
     return this.element;
   }
 }
