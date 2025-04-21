@@ -1,15 +1,26 @@
 export class Component {
   constructor(props) {
-    const { tag = "div", children } = props;
+    const { tag = "div", children, onMount, onRender } = props;
     this.element = document.createElement(tag);
 
     this.children = children || [];
+    this.onMount = onMount || null;
+    this.onRender = onRender || null;
+
+    this._state = {};
+  }
+
+  setState(newState) {
+    this._state = { ...this._state, ...newState };
+    this.render();
   }
 
   renderChildren() {
     if (this.children.length === 0) {
       return;
     }
+
+    this.element.innerHTML = "";
 
     this.children.forEach((child) => {
       if (typeof child === "string") {
@@ -22,6 +33,15 @@ export class Component {
   }
 
   render() {
+    if (this.onMount) {
+      this.onMount();
+      this.onMount = null;
+    }
+
+    if (this.onRender) {
+      this.onRender();
+    }
+
     this.renderChildren();
     return this.element;
   }

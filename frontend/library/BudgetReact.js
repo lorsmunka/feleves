@@ -10,6 +10,7 @@ export class BudgetReact extends Component {
 
   render() {
     const root = document.getElementById(this.rootId);
+
     if (!root) {
       throw new Error(`Root element with id ${this.rootId} not found`);
     }
