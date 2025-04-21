@@ -5,7 +5,7 @@ import { CardContainer } from "./CardContainer.js";
 import { CardBody } from "./CardBody.js";
 import { Row } from "./Row.js";
 import { Column } from "./Column.js";
-import { getWeatherEmoji, getTemperatureClass } from "../WeatherDayCard.js";
+import { getWeatherEmoji, getTemperatureClass } from "./WeatherDayCard.js";
 
 export class WeatherDetail extends Component {
   constructor(props) {
@@ -46,11 +46,11 @@ export class WeatherDetail extends Component {
           children: [this.weatherData.day],
         }),
         new EmojiIcon({
-          emoji: getWeatherEmoji(),
+          emoji: getWeatherEmoji(this.weatherData.condition),
           className: "fs-1 my-3",
         }),
         new Div({
-          className: `${getTemperatureClass()} fs-1 fw-bold`,
+          className: `${getTemperatureClass(this.weatherData.temperature)} fs-1 fw-bold`,
           children: [`${this.weatherData.temperature}°C`],
         }),
         new Div({

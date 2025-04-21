@@ -3,8 +3,7 @@ import { Div } from "../library/Components/Div.js";
 import { Span } from "../library/Components/Span.js";
 import { EmojiIcon } from "./EmojiIcon.js";
 
-export function getWeatherEmoji() {
-  const condition = this.weatherData.condition;
+export function getWeatherEmoji(condition) {
   const emojiMap = {
     Sunny: "☀️",
     Cloudy: "☁️",
@@ -18,9 +17,7 @@ export function getWeatherEmoji() {
   return emojiMap[condition] || "🌤️";
 }
 
-export function getTemperatureColor() {
-  const temp = this.weatherData.temperature;
-
+export function getTemperatureClass(temp) {
   if (temp < 0) {
     return "text-primary";
   } else if (temp < 15) {
@@ -57,11 +54,11 @@ export class WeatherDayCard extends Component {
           children: [this.weatherData.day],
         }),
         new EmojiIcon({
-          emoji: getWeatherEmoji(),
+          emoji: getWeatherEmoji(this.weatherData.condition),
           className: "fs-1 mb-2 d-block",
         }),
         new Div({
-          className: `${getTemperatureColor()} fs-4 fw-bold`,
+          className: `${getTemperatureClass(this.weatherData.temperature)} fs-4 fw-bold`,
           children: [`${this.weatherData.temperature}°C`],
         }),
         new Span({
