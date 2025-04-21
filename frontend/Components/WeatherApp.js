@@ -1,44 +1,71 @@
-import { DataService } from "../DataService.js";
 import { Component } from "../library/Component.js";
+import { Div } from "../library/Components/Div.js";
+import { WeatherWeek } from "./WeatherWeek.js";
+import { WeatherDetail } from "./WeatherDetail.js";
+import { DataService } from "../DataService.js";
 
 export class WeatherApp extends Component {
   constructor(props) {
     super(props);
 
+    this.propsChildren = props.children || [];
+
+    this._state = {
+      weatherData: [],
+      selectedDay: null,
+    };
+
     this.onMount = async () => {
       const weatherData = await DataService.getWeatherData();
       this.setState({
         weatherData,
+        selectedDay: null,
       });
     };
   }
 
+  handleDaySelect(dayData) {
+    this.setState({
+      ...this.state,
+      selectedDay: dayData,
+    });
+  }
+
   render() {
-    const { weatherData } = this.state;
+    const { weatherData, selectedDay } = this.state;
 
-    if (weatherData) {
-      const weatherList = weatherData.map((weather) => {
-        return new Component({
-          tag: "div",
-          children: [
-            new Component({
-              tag: "p",
-              children: [`Date: ${weather.date}`],
-            }),
-            new Component({
-              tag: "p",
-              children: [`Temperature: ${weather.temperature}°C`],
-            }),
-            new Component({
-              tag: "p",
-              children: [`Condition: ${weather.condition}`],
-            }),
-          ],
-        });
-      });
+    const appContainerChildren = [];
 
-      this.children = weatherList;
+    if (weatherData && weatherData.length > 0) {
+      appContainerChildren.push(
+        new WeatherWeek({
+          weatherData: weatherData,
+          onDaySelect: (dayData) => {
+            if (this.state.selectedDay === dayData) {
+              this.handleDaySelect(null);
+            } else {
+              this.handleDaySelect(dayData);
+            }
+          },
+        })
+      );
+
+      if (selectedDay) {
+        appContainerChildren.push(
+          new WeatherDetail({
+            weatherData: selectedDay,
+            className: "mt-4",
+          })
+        );
+      }
     }
+
+    const appContainer = new Div({
+      children: appContainerChildren,
+      className: "container mt-4",
+    });
+
+    this.children = [...this.propsChildren, appContainer];
 
     return super.render();
   }

@@ -10,3 +10,65 @@
   vertical-align: middle;
   user-select: none;
 }
+
+:root {
+  --ios-blue: #007aff;
+  --ios-green: #34c759;
+  --ios-red: #ff3b30;
+  --ios-gray: #8e8e93;
+  --ios-light-gray: #f2f2f7;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f2f2f7;
+}
+
+.weather-day-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.weather-day-card:hover {
+  transform: translateY(-5px);
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.emoji-icon {
+  font-size: 2rem;
+  display: block;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 600;
+  color: #333;
+}
+
+.text-primary {
+  color: var(--ios-blue) !important;
+}
+
+.text-success {
+  color: var(--ios-green) !important;
+}
+
+.text-danger {
+  color: var(--ios-red) !important;
+}
+
+.text-muted {
+  color: var(--ios-gray) !important;
+}
+
+@media (max-width: 768px) {
+  .weather-week {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
