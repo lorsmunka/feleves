@@ -4,21 +4,10 @@ export class CardContainer extends Component {
   constructor(props) {
     super(props);
     this.className = props.className || "";
-    this.element.className = `card shadow ${this.className}`;
+    this.element.className = `card border ${this.className}`;
   }
 
   render() {
-    this.element.innerHTML = "";
-
-    this.children.forEach((child) => {
-      if (typeof child === "string") {
-        const textNode = document.createTextNode(child);
-        this.element.appendChild(textNode);
-      } else if (child instanceof Component) {
-        this.element.appendChild(child.render());
-      }
-    });
-
-    return this.element;
+    return super.render();
   }
 }

@@ -5,6 +5,7 @@ import { CardContainer } from "./CardContainer.js";
 import { CardBody } from "./CardBody.js";
 import { Row } from "./Row.js";
 import { Column } from "./Column.js";
+import { getWeatherEmoji, getTemperatureClass } from "../WeatherDayCard.js";
 
 export class WeatherDetail extends Component {
   constructor(props) {
@@ -12,35 +13,6 @@ export class WeatherDetail extends Component {
     this.weatherData = props.weatherData || {};
     this.className = props.className || "";
     this.element.className = this.className;
-  }
-
-  getWeatherEmoji() {
-    const condition = this.weatherData.condition;
-    const emojiMap = {
-      Sunny: "☀️",
-      Cloudy: "☁️",
-      Rainy: "🌧️",
-      Snowy: "❄️",
-      Windy: "💨",
-      Stormy: "⛈️",
-      Foggy: "🌫️",
-    };
-
-    return emojiMap[condition] || "🌤️";
-  }
-
-  getTemperatureClass() {
-    const temp = this.weatherData.temperature;
-
-    if (temp < 0) {
-      return "text-primary";
-    } else if (temp < 15) {
-      return "text-info";
-    } else if (temp < 25) {
-      return "text-success";
-    } else {
-      return "text-danger";
-    }
   }
 
   createMetricCard(label, value, unit = "") {
@@ -74,11 +46,11 @@ export class WeatherDetail extends Component {
           children: [this.weatherData.day],
         }),
         new EmojiIcon({
-          emoji: this.getWeatherEmoji(),
+          emoji: getWeatherEmoji(),
           className: "fs-1 my-3",
         }),
         new Div({
-          className: `${this.getTemperatureClass()} fs-1 fw-bold`,
+          className: `${getTemperatureClass()} fs-1 fw-bold`,
           children: [`${this.weatherData.temperature}°C`],
         }),
         new Div({

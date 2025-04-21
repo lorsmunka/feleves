@@ -6,14 +6,15 @@ import { DataService } from "../DataService.js";
 
 export class WeatherApp extends Component {
   constructor(props) {
-    super(props);
+    super({
+      ...props,
+      state: {
+        weatherData: [],
+        selectedDay: null,
+      },
+    });
 
     this.propsChildren = props.children || [];
-
-    this._state = {
-      weatherData: [],
-      selectedDay: null,
-    };
 
     this.onMount = async () => {
       const weatherData = await DataService.getWeatherData();
@@ -37,6 +38,15 @@ export class WeatherApp extends Component {
     const appContainerChildren = [];
 
     if (weatherData && weatherData.length > 0) {
+      if (selectedDay) {
+        appContainerChildren.push(
+          new WeatherDetail({
+            weatherData: selectedDay,
+            className: "mb-4",
+          })
+        );
+      }
+
       appContainerChildren.push(
         new WeatherWeek({
           weatherData: weatherData,
@@ -49,15 +59,6 @@ export class WeatherApp extends Component {
           },
         })
       );
-
-      if (selectedDay) {
-        appContainerChildren.push(
-          new WeatherDetail({
-            weatherData: selectedDay,
-            className: "mt-4",
-          })
-        );
-      }
     }
 
     const appContainer = new Div({

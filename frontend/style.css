@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
+}
+
 .emoji-icon {
   font-size: 1.5rem;
   display: inline-block;

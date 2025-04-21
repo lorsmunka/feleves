@@ -1,13 +1,13 @@
 export class Component {
   constructor(props) {
-    const { tag = "div", children, onMount, onRender } = props;
+    const { tag = "div", children, onMount, onRender, state } = props;
     this.element = document.createElement(tag);
 
     this.children = children || [];
     this.onMount = onMount || null;
     this.onRender = onRender || null;
 
-    this._state = {};
+    this._state = state || {};
   }
 
   get state() {
