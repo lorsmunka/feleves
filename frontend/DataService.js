@@ -1,79 +1,22 @@
 export class DataService {
-  static getWeatherData() {
-    const weatherData = [
-      {
-        day: "Monday",
-        temperature: 20,
-        condition: "Sunny",
-        windSpeed: 10, // km/h
-        humidity: 40, // %
-        uvIndex: 7,
-        precipitation: 0, // mm
-        pressure: 1015, // hPa
-      },
-      {
-        day: "Tuesday",
-        temperature: 0,
-        condition: "Snowy",
-        windSpeed: 7,
-        humidity: 78,
-        uvIndex: 2,
-        precipitation: 12,
-        pressure: 1006,
-      },
-      {
-        day: "Wednesday",
-        temperature: 16,
-        condition: "Stormy",
-        windSpeed: 30,
-        humidity: 85,
-        uvIndex: 1,
-        precipitation: 20,
-        pressure: 998,
-      },
-      {
-        day: "Thursday",
-        temperature: 10,
-        condition: "Foggy",
-        windSpeed: 6,
-        humidity: 90,
-        uvIndex: 1,
-        precipitation: 2,
-        pressure: 1009,
-      },
-      {
-        day: "Friday",
-        temperature: 21,
-        condition: "Windy",
-        windSpeed: 25,
-        humidity: 45,
-        uvIndex: 6,
-        precipitation: 0,
-        pressure: 1010,
-      },
-      {
-        day: "Saturday",
-        temperature: 23,
-        condition: "Sunny",
-        windSpeed: 10,
-        humidity: 38,
-        uvIndex: 7,
-        precipitation: 0,
-        pressure: 1014,
-      },
-      {
-        day: "Sunday",
-        temperature: 19,
-        condition: "Cloudy",
-        windSpeed: 14,
-        humidity: 55,
-        uvIndex: 4,
-        precipitation: 0,
-        pressure: 1012,
-      },
-    ];
+  static async getWeatherData() {
+    const url = "https://localhost:7001/api/WeatherForecast/history/7";
 
-    return weatherData;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+
+    console.log(data);
+
+    return data;
   }
   static getPersonalizedGreeting() {
     const date = new Date();
