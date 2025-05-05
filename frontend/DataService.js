@@ -1,6 +1,6 @@
 export class DataService {
   static async getWeatherData() {
-    const url = "https://localhost:7001/api/WeatherForecast/history/7";
+    const url = "https://localhost:7001/api/WeatherForecast/history/10";
 
     const response = await fetch(url, {
       method: "GET",

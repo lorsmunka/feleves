@@ -1,3 +1,4 @@
+// JavaScript component
 import { BudgetReact } from "./library/BudgetReact.js";
 import { H1 } from "./library/Components/H1.js";
 import { DataService } from "./DataService.js";
@@ -10,6 +11,7 @@ const budgetReact = new BudgetReact({
       children: [
         new H1({
           children: [`${DataService.getPersonalizedGreeting()}, Here's Your Weather Forecast`],
+          className: "weather-heading display-4 text-center",
         }),
       ],
     }),

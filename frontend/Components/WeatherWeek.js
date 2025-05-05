@@ -9,7 +9,7 @@ export class WeatherWeek extends Component {
     this.weatherData = props.weatherData || [];
     this.onDaySelect = props.onDaySelect || null;
 
-    this.element.className = "weather-week overflow-auto";
+    this.element.className = "weather-week";
   }
 
   render() {
