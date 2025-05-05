@@ -4,9 +4,7 @@ export class Column extends Component {
   constructor(props) {
     super(props);
     this.size = props.size || ""; // e.g. "col-md-6"
-    this.className = props.className || "";
-
-    this.element.className = `col ${this.size} ${this.className}`;
+    this.className = `col ${this.size} ${props.className || ""}`;
   }
 
   render() {
