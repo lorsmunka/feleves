@@ -1,4 +1,4 @@
-import { Component } from "../library/Component.js";
+import { Component } from "../BudgetReact/Component.js";
 import { WeatherDayCard } from "./WeatherDayCard.js";
 import { Row } from "./Row.js";
 import { Column } from "./Column.js";

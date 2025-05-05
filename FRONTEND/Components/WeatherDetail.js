@@ -1,13 +1,13 @@
-import { Component } from "../library/Component.js";
-import { Div } from "../library/Components/Div.js";
-import { Span } from "../library/Components/Span.js";
+import { Component } from "../BudgetReact/Component.js";
+import { Div } from "../BudgetReact/Components/Div.js";
+import { Span } from "../BudgetReact/Components/Span.js";
 import { EmojiIcon } from "./EmojiIcon.js";
 import { CardContainer } from "./CardContainer.js";
 import { CardBody } from "./CardBody.js";
 import { Row } from "./Row.js";
 import { Column } from "./Column.js";
 import { getWeatherEmoji, getTemperatureClass, getBackgroundGradient } from "./WeatherDayCard.js";
-import { Hr } from "../library/Components/Hr.js";
+import { Hr } from "../BudgetReact/Components/Hr.js";
 
 export class WeatherDetail extends Component {
   constructor(props) {

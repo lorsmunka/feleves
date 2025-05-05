@@ -1,5 +1,5 @@
-import { Component } from "../library/Component.js";
-import { Div } from "../library/Components/Div.js";
+import { Component } from "../BudgetReact/Component.js";
+import { Div } from "../BudgetReact/Components/Div.js";
 import { WeatherWeek } from "./WeatherWeek.js";
 import { WeatherDetail } from "./WeatherDetail.js";
 import { DataService } from "../DataService.js";

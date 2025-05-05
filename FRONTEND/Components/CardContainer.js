@@ -1,4 +1,4 @@
-import { Component } from "../library/Component.js";
+import { Component } from "../BudgetReact/Component.js";
 
 export class CardContainer extends Component {
   constructor(props) {

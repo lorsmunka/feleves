@@ -1,6 +1,6 @@
 // JavaScript component
-import { BudgetReact } from "./library/BudgetReact.js";
-import { H1 } from "./library/Components/H1.js";
+import { BudgetReact } from "./BudgetReact/BudgetReact.js";
+import { H1 } from "./BudgetReact/Components/H1.js";
 import { DataService } from "./DataService.js";
 import { WeatherApp } from "./Components/WeatherApp.js";
 

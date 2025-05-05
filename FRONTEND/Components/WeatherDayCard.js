@@ -1,6 +1,6 @@
-import { Component } from "../library/Component.js";
-import { Div } from "../library/Components/Div.js";
-import { Span } from "../library/Components/Span.js";
+import { Component } from "../BudgetReact/Component.js";
+import { Div } from "../BudgetReact/Components/Div.js";
+import { Span } from "../BudgetReact/Components/Span.js";
 import { EmojiIcon } from "./EmojiIcon.js";
 
 export function getWeatherEmoji(condition) {

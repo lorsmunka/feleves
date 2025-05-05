@@ -1,5 +1,5 @@
-import { Component } from "../library/Component.js";
-import { Span } from "../library/Components/Span.js";
+import { Component } from "../BudgetReact/Component.js";
+import { Span } from "../BudgetReact/Components/Span.js";
 
 export class EmojiIcon extends Component {
   constructor(props) {
