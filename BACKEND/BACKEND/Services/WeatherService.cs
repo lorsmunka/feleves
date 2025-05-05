@@ -7,81 +7,77 @@ public class WeatherService
     private readonly Random _random = new();
     private readonly string[] _conditions = { "Sunny", "Cloudy", "Rainy", "Snowy", "Windy", "Foggy", "Stormy" };
     
-    public WeatherData PredictNextDayWeather(List<WeatherData> previousWeather)
+    public List<WeatherData> GetForecastedWeather(int days, string[] daysOfWeek)
     {
-        if (previousWeather == null || previousWeather.Count < 3)
+        var result = new List<WeatherData>();
+        
+        int randomDays = days <= 3 ? days : 3;
+        
+        for (int i = 0; i < randomDays; i++)
         {
-            return GenerateRandomWeather(GetNextDay(previousWeather ?? new List<WeatherData>()));
+            string day = daysOfWeek[i % 7];
+            result.Add(GenerateRandomWeather(day));
         }
         
-        var lastThreeDays = previousWeather.TakeLast(3).ToList();
-        
-        bool hasConsistentWeather = lastThreeDays.All(d => d.Condition == lastThreeDays[0].Condition);
-        
-        string day = GetNextDay(previousWeather);
-        
-        if (hasConsistentWeather)
+        if (days > 3)
         {
-            return PredictWeatherWithConsistentHistory(lastThreeDays, day);
+            for (int i = 3; i < days; i++)
+            {
+                string day = daysOfWeek[i % 7];
+                var previousThreeDays = result.Skip(i - 3).Take(3).ToList();
+                result.Add(PredictNextDayWeather(previousThreeDays, day));
+            }
         }
         
-        return GenerateRandomWeather(day);
+        return result;
     }
     
-    private string GetNextDay(List<WeatherData> previousWeather)
+    private WeatherData PredictNextDayWeather(List<WeatherData> previousThreeDays, string day)
     {
-        if (previousWeather == null || previousWeather.Count == 0)
-        {
-            return "Monday";
-        }
+        bool allSameConditions = previousThreeDays.All(d => d.Condition == previousThreeDays[0].Condition);
         
-        string lastDay = previousWeather.Last().Day;
-        
-        return lastDay switch
+        if (allSameConditions)
         {
-            "Monday" => "Tuesday",
-            "Tuesday" => "Wednesday",
-            "Wednesday" => "Thursday",
-            "Thursday" => "Friday",
-            "Friday" => "Saturday",
-            "Saturday" => "Sunday",
-            "Sunday" => "Monday",
-            _ => "Monday"
-        };
-    }
-    
-    private WeatherData PredictWeatherWithConsistentHistory(List<WeatherData> lastThreeDays, string day)
-    {
-        int probabilityValue = _random.Next(1, 101);
-        string currentCondition = lastThreeDays[0].Condition;
-        string nextCondition;
-        
-        if (probabilityValue <= 70)
-        {
-            nextCondition = currentCondition;
-        }
-        else if (probabilityValue <= 90)
-        {
-            nextCondition = ImproveWeatherCondition(currentCondition);
+            string currentCondition = previousThreeDays[0].Condition;
+            int probability = _random.Next(1, 101);
+            string newCondition;
+            
+            if (probability <= 70)
+            {
+                newCondition = currentCondition;
+            }
+            else if (probability <= 90)
+            {
+                newCondition = ImproveWeatherCondition(currentCondition);
+            }
+            else
+            {
+                newCondition = WorsenWeatherCondition(currentCondition);
+            }
+            
+            return CreateWeatherData(day, newCondition);
         }
         else
         {
-            nextCondition = WorsenWeatherCondition(currentCondition);
+            return GenerateRandomWeather(day);
         }
-        
+    }
+    
+    private WeatherData CreateWeatherData(string day, string condition)
+    {
         return new WeatherData
         {
             Day = day,
-            Condition = nextCondition,
-            Temperature = GenerateTemperatureBasedOnCondition(nextCondition),
+            Condition = condition,
+            Temperature = GenerateTemperatureBasedOnCondition(condition),
             WindSpeed = _random.Next(5, 31),
             Humidity = _random.Next(30, 96),
-            UvIndex = GenerateUvIndexBasedOnCondition(nextCondition),
-            Precipitation = GeneratePrecipitationBasedOnCondition(nextCondition),
+            UvIndex = GenerateUvIndexBasedOnCondition(condition),
+            Precipitation = GeneratePrecipitationBasedOnCondition(condition),
             Pressure = _random.Next(995, 1026)
         };
     }
-    
+
     private string ImproveWeatherCondition(string currentCondition)
     {
         return currentCondition switch
@@ -156,17 +152,6 @@ public class WeatherService
     private WeatherData GenerateRandomWeather(string day)
     {
         string randomCondition = _conditions[_random.Next(_conditions.Length)];
-        
-        return new WeatherData
-        {
-            Day = day,
-            Condition = randomCondition,
-            Temperature = GenerateTemperatureBasedOnCondition(randomCondition),
-            WindSpeed = _random.Next(5, 31),
-            Humidity = _random.Next(30, 96),
-            UvIndex = GenerateUvIndexBasedOnCondition(randomCondition),
-            Precipitation = GeneratePrecipitationBasedOnCondition(randomCondition),
-            Pressure = _random.Next(995, 1026)
-        };
+        return CreateWeatherData(day, randomCondition);
     }
 }
