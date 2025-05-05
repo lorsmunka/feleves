@@ -2,7 +2,7 @@
 import { BudgetReact } from "./BudgetReact/BudgetReact.js";
 import { H1 } from "./BudgetReact/Components/H1.js";
 import { DataService } from "./DataService.js";
-import { WeatherApp } from "./Components/WeatherApp.js";
+import { WeatherApp } from "./CustomComponents/WeatherApp.js";
 
 const budgetReact = new BudgetReact({
   rootId: "root",
