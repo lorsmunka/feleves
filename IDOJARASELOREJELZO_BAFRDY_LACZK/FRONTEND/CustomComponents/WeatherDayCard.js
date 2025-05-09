@@ -97,7 +97,7 @@ export class WeatherDayCard extends Component {
           children: [
             new Div({
               className: "humidity-wind text-contrast-secondary small",
-              children: [`${this.weatherData.humidity || "40%"} · ${this.weatherData.windSpeed || "5"} km/h`],
+              children: [`${this.weatherData.humidity || "40%"} · ${this.weatherData.windSpeed || "NA"} km/h`],
             }),
           ],
         }),
